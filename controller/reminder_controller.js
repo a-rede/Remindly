@@ -1,8 +1,15 @@
-let database = require("../database");
+let userModel = require("../database").userModel;
 
 let remindersController = {
   list: (req, res) => {
-    res.render("reminder/index", { reminders: database.cindy.reminders });
+    const currentUser = req.user;
+    if (!currentUser) {
+      res.redirect("/login")
+    } else {
+      
+      const user = userModel.findOne(currentUser.email)
+      res.render("reminder/index", { reminders: user.reminders });
+    }
   },
 
   new: (req, res) => {
@@ -41,11 +48,33 @@ let remindersController = {
   },
 
   update: (req, res) => {
-    // implement this code
-  },
+    console.log("----")
+    console.log(typeof req.body.completed);
+    let reminderToUpdate = req.params.id;
+    let reminderIndex = database.cindy.reminders.findIndex(function (reminder) {
+      return reminder.id == reminderToUpdate;
+    });
+    if (reminderIndex !== -1) {
+      let updatedReminder = {
+        id: database.cindy.reminders[reminderIndex].id,
+        title: req.body.title,
+        description: req.body.description,
+        completed: req.body.completed == "true",
+      };
+      database.cindy.reminders[reminderIndex] = updatedReminder;
+    }
+    res.redirect("/reminders");
+},
+
 
   delete: (req, res) => {
-    // Implement this code
+    let reminderToDeleteIndex = database.cindy.reminders.findIndex(function (reminder) {
+      return reminder.id == req.params.id;
+    });
+    if (reminderToDeleteIndex > -1) {
+      database.cindy.reminders.splice(reminderToDeleteIndex, 1);
+    }
+    res.redirect("/reminders");
   },
 };
 
