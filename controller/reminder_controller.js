@@ -1,5 +1,5 @@
 let userModel = require("../database").userModel;
-
+let database = require("../database")
 let remindersController = {
   list: (req, res) => {
     const currentUser = req.user;
@@ -16,35 +16,37 @@ let remindersController = {
     res.render("reminder/create");
   },
 
-  listOne: (req, res) => {
+  listOne: async (req, res) => {
     const currentUser = req.user;
     if (!currentUser) {
       res.redirect("/login")
     } else {
+      const user = await userModel.findOne(currentUser.email)
       let reminderToFind = req.params.id;
-      let searchResult = database.currentUser.reminders.find(function (reminder) {
+      let searchResult = user.reminders.find(function (reminder) {
         return reminder.id == reminderToFind;
       });
       if (searchResult != undefined) {
         res.render("reminder/single-reminder", { reminderItem: searchResult });
       } else {
-        res.render("reminder/index", { reminders: database.currentUser.reminders });
+        res.render("reminder/index", { reminders: user.reminders });
       }
     }
   },
-
+  
   create: (req, res) => {
     const currentUser = req.user;
     if (!currentUser) {
       res.redirect("/login")
     } else {
+      const user = userModel.findOne(currentUser.email)
       let reminder = {
-        id: database.currentUser.reminders.length + 1,
+        id: user.reminders.length + 1,
         title: req.body.title,
         description: req.body.description,
         completed: false,
       };
-      database.currentUser.reminders.push(reminder);
+      user.reminders.push(reminder);
       res.redirect("/reminders");
     }
   },
@@ -54,8 +56,9 @@ let remindersController = {
     if (!currentUser) {
       res.redirect("/login")
     } else {
+      const user = userModel.findOne(currentUser.email)
       let reminderToFind = req.params.id;
-      let searchResult = database.currentUser.reminders.find(function (reminder) {
+      let searchResult = user.reminders.find(function (reminder) {
         return reminder.id == reminderToFind;
       });
       res.render("reminder/edit", { reminderItem: searchResult });
@@ -67,18 +70,19 @@ let remindersController = {
     if (!currentUser) {
       res.redirect("/login")
     } else {
+      const user = userModel.findOne(currentUser.email)
       let reminderToUpdate = req.params.id;
-      let reminderIndex = database.currentUser.reminders.findIndex(function (reminder) {
+      let reminderIndex = user.reminders.findIndex(function (reminder) {
         return reminder.id == reminderToUpdate;
       });
       if (reminderIndex !== -1) {
         let updatedReminder = {
-          id: database.currentUser.reminders[reminderIndex].id,
+          id: user.reminders[reminderIndex].id,
           title: req.body.title,
           description: req.body.description,
           completed: req.body.completed == "true",
         };
-        database.currentUser.reminders[reminderIndex] = updatedReminder;
+        user.reminders[reminderIndex] = updatedReminder;
       }
       res.redirect("/reminders");
     }
@@ -90,11 +94,12 @@ let remindersController = {
     if (!currentUser) {
       res.redirect("/login")
     } else {
-      let reminderToDeleteIndex = database.currentUser.reminders.findIndex(function (reminder) {
+      const user = userModel.findOne(currentUser.email)
+      let reminderToDeleteIndex = user.reminders.findIndex(function (reminder) {
         return reminder.id == req.params.id;
       });
       if (reminderToDeleteIndex > -1) {
-        database.currentUser.reminders.splice(reminderToDeleteIndex, 1);
+        user.reminders.splice(reminderToDeleteIndex, 1);
       }
       res.redirect("/reminders");
     }
