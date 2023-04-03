@@ -6,4 +6,12 @@ const listFriends = (req, res) => {
     res.render("friends/list", { friends: friendData });
 };
 
-module.exports = { listFriends }
+const searchUser = (req, res) => {
+    const query = req.query.q;
+    const users = query
+    ? userModel.searchUser(query).filter((user) => user.id !== req.user.id)
+    : [];
+    res.render("friends/search", { users });
+}
+
+module.exports = { listFriends, searchUser, };
