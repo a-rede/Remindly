@@ -12,27 +12,32 @@ const database = [
         subtasks: ["Subtask 1", "Subtask 2"],
         tags: ["tag1", "tag2"],
         reminderDate: "2023-04-10"
-      }]
+      }],
+      friends: []
     },
     {
       id: 2,
       name: "Johnny Doe",
       email: "johnny123@gmail.com",
       password: "johnny123!",
-      reminders: [{id: 1, title: "testing Johnny",
-      description: "testing",
-      completed: true,
-      subtasks: ["Subtask 1", "Subtask 2"],
-      tags: ["tag1", "tag2"],
-      reminderDate: "2023-04-10"
-    }]
+      reminders: [{
+        id: 1, 
+        title: "testing Johnny",
+        description: "testing",
+        completed: true,
+        subtasks: ["Subtask 1", "Subtask 2"],
+        tags: ["tag1", "tag2"],
+        reminderDate: "2023-04-10"
+      }],
+      friends: [],
     },
     {
       id: 3,
       name: "Jonathan Chen",
       email: "jonathan123@gmail.com",
       password: "jonathan123!",
-      reminders: []
+      reminders: [],
+      friends: [],
     },
   ];
   
