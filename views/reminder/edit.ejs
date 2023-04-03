@@ -33,6 +33,18 @@
         </label>
       </div>
     </div>
+    <div class="form-group">
+      <label for="subtasks">Subtasks (comma-separated):</label>
+      <input type="text" class="form-control" id="subtasks" name="subtasks" value="<%= reminderItem.subtasks.join(', ') %>">
+    </div>
+    <div class="form-group">
+      <label for="tags">Tags (comma-separated):</label>
+      <input type="text" class="form-control" id="tags" name="tags" value="<%= reminderItem.tags.join(', ') %>">
+    </div>
+    <div class="form-group">
+      <label for="reminderDate">Reminder Date:</label>
+      <input type="date" class="form-control" id="reminderDate" name="reminderDate" value="<%= reminderItem.reminderDate %>">
+    </div>
     <button type="submit" class="btn btn-default">Submit</button>
   </form>
 </div>

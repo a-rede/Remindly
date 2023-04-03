@@ -10,8 +10,11 @@
       <% if (reminderItem.completed == true) { %>
         <span class="badge badge-success">True</span>
       <% } else if (reminderItem.completed == false) { %>
-        <span class="badge badge-danger">False</span>
+        <span class="badge badge-danger">False</span> <br>
       <% } %>
+      <strong>Subtasks:</strong> <%= reminderItem.subtasks.join(", ") %><br>
+      <strong>Tags:</strong> <%= reminderItem.tags.join(", ") %><br>
+      <strong>Reminder Date:</strong> <%= reminderItem.reminderDate %> <br>
       <a class="pull-right" href=<%= "/reminder/" + reminderItem.id %>>View</a>
     </li>
   <% }) %>

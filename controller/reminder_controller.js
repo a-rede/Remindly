@@ -45,6 +45,9 @@ let remindersController = {
         title: req.body.title,
         description: req.body.description,
         completed: false,
+        subtasks: req.body.subtasks ? req.body.subtasks.split(",") : [],
+        tags: req.body.tags ? req.body.tags.split(",") : [],
+        reminderDate: req.body.reminderDate,
       };
       user.reminders.push(reminder);
       res.redirect("/reminders");
@@ -81,6 +84,9 @@ let remindersController = {
           title: req.body.title,
           description: req.body.description,
           completed: req.body.completed == "true",
+          subtasks: req.body.subtasks ? req.body.subtasks.split(",") : [],
+          tags: req.body.tags ? req.body.tags.split(",") : [],
+          reminderDate: req.body.reminderDate,
         };
         user.reminders[reminderIndex] = updatedReminder;
       }

@@ -4,14 +4,28 @@ const database = [
       name: "Jimmy Smith",
       email: "jimmy123@gmail.com",
       password: "jimmy123!",
-      reminders: [{id: 1, title: "something", description: "something", completed: false}]
+      reminders: [{
+        id: 1,
+        title: "something",
+        description: "something",
+        completed: false,
+        subtasks: ["Subtask 1", "Subtask 2"],
+        tags: ["tag1", "tag2"],
+        reminderDate: "2023-04-10"
+      }]
     },
     {
       id: 2,
       name: "Johnny Doe",
       email: "johnny123@gmail.com",
       password: "johnny123!",
-      reminders: []
+      reminders: [{id: 1, title: "testing Johnny",
+      description: "testing",
+      completed: true,
+      subtasks: ["Subtask 1", "Subtask 2"],
+      tags: ["tag1", "tag2"],
+      reminderDate: "2023-04-10"
+    }]
     },
     {
       id: 3,
