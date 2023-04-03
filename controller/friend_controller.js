@@ -12,6 +12,14 @@ const searchUser = (req, res) => {
     ? userModel.searchUser(query).filter((user) => user.id !== req.user.id)
     : [];
     res.render("friends/search", { users });
-}
+};
 
-module.exports = { listFriends, searchUser, };
+const addFriend = (req, res) => {
+    const friendId = parseInt(req.params.id);
+    if (!user.friends.includes(friendId)) {
+        user.friends.push(friendId);
+    }
+    request.redirect("/friends");
+};
+
+module.exports = { listFriends, searchUser, addFriend };
