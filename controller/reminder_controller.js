@@ -1,14 +1,15 @@
 let userModel = require("../database").userModel;
-let database = require("../database")
+
 let remindersController = {
   list: (req, res) => {
     const currentUser = req.user;
     if (!currentUser) {
       res.redirect("/login")
     } else {
-      
       const user = userModel.findOne(currentUser.email)
-      res.render("reminder/index", { reminders: user.reminders });
+      const friendData = user.friends.map((friendID) => userModel.findById(friendID));
+      const allReminders = [user, ...friendData].flatMap((u) => u.reminders);
+      res.render("reminder/index", { reminders: allReminders });
     }
   },
 
