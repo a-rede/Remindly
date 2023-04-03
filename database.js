@@ -56,6 +56,13 @@ const database = [
       }
       throw new Error(`Couldn't find user with id: ${id}`);
     },
+    searchUser: (search) => {
+      return database.filter(
+        (user) =>
+        user.name.toLowerCase().includes(search.toLowerCase()) ||
+        user.email.toLowerCase().includes(search.toLowerCase())
+      );
+    },
   };
   
   module.exports = { database, userModel };
