@@ -13,7 +13,7 @@ const database = [
         tags: ["tag1", "tag2"],
         reminderDate: "2023-04-10"
       }],
-      friends: []
+      friends: [],
     },
     {
       id: 2,
