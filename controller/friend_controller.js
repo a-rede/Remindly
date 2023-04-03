@@ -16,10 +16,11 @@ const searchUser = (req, res) => {
 
 const addFriend = (req, res) => {
     const friendId = parseInt(req.params.id);
+    const user = userModel.findById(req.user.id);
     if (!user.friends.includes(friendId)) {
         user.friends.push(friendId);
     }
-    request.redirect("/friends");
+    res.redirect("/friends");
 };
 
 module.exports = { listFriends, searchUser, addFriend };
