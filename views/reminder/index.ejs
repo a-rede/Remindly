@@ -12,8 +12,16 @@
         <% } else if (reminderItem.completed == false) { %>
           <span class="badge badge-danger">False</span> <br>
         <% } %>
-        <strong>Subtasks:</strong> <%= reminderItem.subtasks.join(", ") %><br>
-        <strong>Tags:</strong> <%= reminderItem.tags.join(", ") %><br>
+        <strong>Subtasks:</strong>
+        <% reminderItem.subtasks.forEach(function(subtask) { %>
+          <span class="badge badge-secondary mr-1"><%= subtask %></span>
+        <% }) %>
+        <br>
+        <strong>Tags:</strong>
+        <% reminderItem.tags.forEach(function(tag) { %>
+          <span class="badge badge-primary mr-1"><%= tag %></span>
+        <% }) %>
+        <br>
         <strong>Reminder Date:</strong> <%= reminderItem.reminderDate %> <br>
         <a class="pull-right" href=<%= "/reminder/" + reminderItem.id %>>View</a>
       </li>
@@ -34,8 +42,16 @@
           <% } else if (reminderItem.completed == false) { %>
             <span class="badge badge-danger">False</span> <br>
           <% } %>
-          <strong>Subtasks:</strong> <%= reminderItem.subtasks.join(", ") %><br>
-          <strong>Tags:</strong> <%= reminderItem.tags.join(", ") %><br>
+          <strong>Subtasks:</strong>
+          <% reminderItem.subtasks.forEach(function(subtask) { %>
+            <span class="badge badge-secondary mr-1"><%= subtask %></span>
+          <% }) %>
+          <br>
+          <strong>Tags:</strong>
+          <% reminderItem.tags.forEach(function(tag) { %>
+            <span class="badge badge-primary mr-1"><%= tag %></span>
+          <% }) %>
+          <br>
           <strong>Reminder Date:</strong> <%= reminderItem.reminderDate %> <br>
         </li>
       <% }) %>
