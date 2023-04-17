@@ -46,9 +46,10 @@ app.post(
 );
 
 app.get("/logout", function (req, res) {
-  req.logout();
-  res.redirect("/login");
-});
+  req.logout(() => {
+    res.redirect("/login");
+  })
+})
 
 app.get("/reminders", reminderController.list);
 
