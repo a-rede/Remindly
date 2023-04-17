@@ -8,11 +8,12 @@ let remindersController = {
     } else {
       const user = userModel.findOne(currentUser.email)
       const friendData = user.friends.map((friendID) => userModel.findById(friendID));
-      const allReminders = [user, ...friendData].flatMap((u) => u.reminders);
-      res.render("reminder/index", { reminders: allReminders });
+      const userReminders = user.reminders;
+      const friendReminders = friendData.flatMap((u) => u.reminders);
+      res.render("reminder/index", { userReminders, friendReminders });
     }
   },
-
+  
   new: (req, res) => {
     res.render("reminder/create");
   },
