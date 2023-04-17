@@ -44,6 +44,12 @@ app.post(
     failureRedirect: "/login",
   })
 );
+
+app.get("/logout", function (req, res) {
+  req.logout();
+  res.redirect("/login");
+});
+
 app.get("/reminders", reminderController.list);
 
 app.get("/reminder/new", reminderController.new);
@@ -54,10 +60,8 @@ app.get("/reminder/:id/edit", reminderController.edit);
 
 app.post("/reminder/", reminderController.create);
 
-// Implement this yourself
 app.post("/reminder/update/:id", reminderController.update);
 
-// Implement this yourself
 app.post("/reminder/delete/:id", reminderController.delete);
 
 // new routes for friends
