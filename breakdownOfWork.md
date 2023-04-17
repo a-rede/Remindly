@@ -70,6 +70,7 @@ Abell Rede:
 
 I worked on the following tasks:
 1. Changed the main reminder page to also follow the same styling where the subtasks and tags are badge like
+2. Fixed the logout route
 
 Jake Choi:
 
